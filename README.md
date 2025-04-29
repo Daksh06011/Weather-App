@@ -1,21 +1,22 @@
-🌦️ Weather App — Real-Time Weather with Node.js & Express
+# 🌦️ Weather App — Real-Time Weather with Node.js & Express
+
 This is a simple and lightweight Node.js weather application that uses the OpenWeatherMap API to fetch real-time weather data based on city names. It's built using Express.js and Axios, with environment variable support via dotenv.
 
-🧩 Features
-🔍 Get current weather by city name
+---
 
-🌐 Integrates with OpenWeatherMap
+## 🧩 Features
 
-🧪 Uses .env to manage API secrets securely
+- 🔍 Get current weather by city name
+- 🌐 Integrates with [OpenWeatherMap](https://openweathermap.org/api)
+- 🧪 Uses `.env` to manage API secrets securely
+- ⚙️ Lightweight Express.js server
+- 📦 Includes `axios`, `dotenv`, and `express` as dependencies
 
-⚙️ Lightweight Express.js server
+---
 
-📦 Includes axios, dotenv, and express as dependencies
+## 📁 Project Structure
 
-📁 Project Structure
-bash
-Copy
-Edit
+```
 weather-app/
 ├── public/             # Static frontend files (if needed)
 ├── .env                # API key configuration
@@ -24,49 +25,52 @@ weather-app/
 ├── package.json        # Project metadata & dependencies
 ├── package-lock.json   # Locked dependency tree
 └── README.md           # Documentation (You are here!)
-🔧 Setup Instructions
-Clone the repository
+```
 
-bash
-Copy
-Edit
+---
+
+## 🔧 Setup Instructions
+
+1. **Clone the repository**
+
+```bash
 git clone https://github.com/your-username/weather-app.git
 cd weather-app
-Install the dependencies
+```
 
-bash
-Copy
-Edit
+2. **Install the dependencies**
+
+```bash
 npm install
-Configure your environment
+```
 
-Create a .env file and add your OpenWeatherMap API key:
+3. **Configure your environment**
 
-env
-Copy
-Edit
+Create a `.env` file and add your OpenWeatherMap API key:
+
+```env
 API_KEY=your_api_key_here
-⚠️ Never commit your .env file to GitHub. Make sure it’s in .gitignore.
+```
 
-Start the server
+> ⚠️ Never commit your `.env` file to GitHub. Make sure it’s in `.gitignore`.
 
-bash
-Copy
-Edit
+4. **Start the server**
+
+```bash
 node server.js
-Use the weather API
+```
+
+5. **Use the weather API**
 
 Visit:
 
-bash
-Copy
-Edit
+```
 http://localhost:3000/weather?city=London
-Response:
+```
 
-json
-Copy
-Edit
+Example response:
+
+```json
 {
   "name": "London",
   "main": {
@@ -78,11 +82,15 @@ Edit
     }
   ]
 }
-📚 Technologies Used
-Node.js – Runtime environment
+```
 
-Express – Web server framework
+---
 
-Axios – HTTP client for API calls
+## 📚 Technologies Used
 
-dotenv – For managing environment variables
+- **Node.js** – Runtime environment
+- **Express** – Web server framework
+- **Axios** – HTTP client for API calls
+- **dotenv** – For managing environment variables
+
+---
