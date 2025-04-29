@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Weather App</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #74ebd5, #ACB6E5);
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1470&q=80') no-repeat center center/cover;
+            opacity: 0.3;
+            z-index: 0;
+            filter: brightness(0.7);
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            background: rgba(0, 0, 0, 0.35);
+            padding: 40px 50px;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+            width: 360px;
+            max-width: 90vw;
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 25px;
+            font-size: 3.5rem;
+            font-weight: 700;
+            text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.7);
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 30px;
+            width: 100%;
+        }
+
+        input[type="text"] {
+            padding: 15px 20px;
+            border: none;
+            border-radius: 12px;
+            width: 100%;
+            margin-bottom: 20px;
+            font-size: 20px;
+            outline: none;
+            transition: box-shadow 0.3s ease;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.15);
+            color: #fff;
+        }
+
+        input[type="text"]::placeholder {
+            color: #ddd;
+        }
+
+        input[type="text"]:focus {
+            box-shadow: 0 0 15px 3px #4fc3f7;
+            background: rgba(255, 255, 255, 0.25);
+        }
+
+        button {
+            padding: 15px 20px;
+            border: none;
+            border-radius: 12px;
+            background-color: #4fc3f7;
+            color: white;
+            font-size: 20px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            width: 100%;
+            box-shadow: 0 5px 15px rgba(79, 195, 247, 0.6);
+        }
+
+        button:hover {
+            background-color: #039be5;
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(3, 155, 229, 0.8);
+        }
+
+        #weather {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 25px 30px;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+            color: #fff;
+            font-size: 1.3rem;
+            animation: fadeIn 0.6s ease forwards;
+            backdrop-filter: blur(15px);
+            user-select: none;
+        }
+
+        #weather h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7);
+        }
+
+        #weather p {
+            margin: 10px 0;
+            text-transform: capitalize;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+
+        .emoji-animated {
+            display: inline-block;
+            font-size: 6rem;
+            animation: bounce 1.5s infinite;
+            user-select: none;
+            margin-bottom: 15px;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            font-size: 3rem;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 25px 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            width: 320px;
+            transition: box-shadow 0.3s ease;
+        }
+
+        form:hover {
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        input[type="text"] {
+            padding: 12px 15px;
+            border: none;
+            border-radius: 8px;
+            width: 100%;
+            margin-bottom: 15px;
+            font-size: 18px;
+            outline: none;
+            transition: box-shadow 0.3s ease;
+        }
+
+        input[type="text"]:focus {
+            box-shadow: 0 0 8px 2px #3498db;
+        }
+
+        button {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            background-color: #3498db;
+            color: white;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+            transform: scale(1.05);
+        }
+
+        #weather {
+            margin-top: 30px;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 20px 25px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            width: 320px;
+            text-align: center;
+            color: #fff;
+            font-size: 1.2rem;
+            animation: fadeIn 0.6s ease forwards;
+            backdrop-filter: blur(10px);
+        }
+
+        #weather h2 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+
+        #weather p {
+            margin: 8px 0;
+            text-transform: capitalize;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+        }
+
+        #weather img {
+            margin-top: 10px;
+            width: 100px;
+            height: 100px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        footer {
+            position: absolute;
+            bottom: 10px;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 400;
+            user-select: none;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 400px) {
+            .container {
+                width: 90%;
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Weather App</h1>
+        <form id="weather-form">
+            <input type="text" id="city" placeholder="Enter city name" required />
+            <button type="submit">Get Weather</button>
+        </form>
+        <div id="weather"></div>
+        <footer>© 2024 Weather App by Daksh Singh</footer>
+    </div>
+
+    <script>
+        function mapWeatherToEmoji(weatherId) {
+            if (weatherId >= 200 && weatherId < 300) {
+                return "⛈️"; // Thunderstorm
+            } else if (weatherId >= 300 && weatherId < 600) {
+                return "🌧️"; // Rain
+            } else if (weatherId >= 600 && weatherId < 700) {
+                return "❄️"; // Snow
+            } else if (weatherId >= 700 && weatherId < 800) {
+                return "🌫️"; // Fog/Mist
+            } else if (weatherId === 800) {
+                return "☀️"; // Clear sun
+            } else if (weatherId === 801) {
+                return "🌤️"; // Few clouds
+            } else if (weatherId > 801 && weatherId < 805) {
+                return "☁️"; // Scattered to broken clouds
+            } else {
+                return "☀️"; // Default clear
+            }
+        }
+
+        function mapTemperatureToEmoji(temp) {
+            if (temp <= 0) {
+                return "🧊"; // Ice (freezing cold)
+            } else if (temp > 0 && temp <= 10) {
+                return "🥶"; // Cold
+            } else if (temp > 10 && temp <= 20) {
+                return "🙂"; // Mild
+            } else if (temp > 20 && temp <= 30) {
+                return "😎"; // Warm
+            } else {
+                return "🔥"; // Hot (red sun)
+            }
+        }
+
+        document.getElementById('weather-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const city = document.getElementById('city').value;
+            try {
+                const response = await fetch(`/weather?city=${city}`);
+                const data = await response.json();
+                const weatherDiv = document.getElementById('weather');
+
+                if (response.ok) {
+                    const weatherId = data.weather[0].id;
+
+                const weatherEmoji = mapWeatherToEmoji(weatherId);
+                const tempEmoji = mapTemperatureToEmoji(data.main.temp);
+
+                weatherDiv.innerHTML = `
+                    <h2>Weather in ${data.name}</h2>
+                    <p class="emoji-animated" title="Weather Condition Emoji">${weatherEmoji}</p>
+                    <p>Temperature: ${data.main.temp} °C</p>
+                    <p>Weather: ${data.weather[0].description}</p>
+                `;
+                } else {
+                    weatherDiv.innerHTML = `<p>${data.error}</p>`;
+                }
+            } catch (error) {
+                console.error('Fetch error:', error);
+                document.getElementById('weather').innerHTML = '<p>Failed to fetch weather data. Please try again later.</p>';
+            }
+        });
+    </script>
+</body>
+</html>
